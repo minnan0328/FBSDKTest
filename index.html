@@ -10,28 +10,37 @@
     <meta property="og:og:description" content="A description for the URL which is to be displayed">
     <meta property="og:title" content="A Title for Feed Dialog!">
     <meta property="og:image"
-        content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Goat_01.jpg/270px-Goat_01.jpg">
+        content="https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh">
     <title>Unity WebGL Player | WebGLFitWindow</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <!-- <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
     <script>
         var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Test1.json", { onProgress: UnityProgress });
-    </script>
+    </script> -->
 </head>
 
 <body>
-    <div class="webgl-content">
+    <!-- <div class="webgl-content">
         <div id="gameContainer" style="width: 1280px; height: 720px"></div>
         <div class="footer">
             <div class="webgl-logo"></div>
             <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
             <div class="title">WebGLFitWindow</div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="fb-share-button" data-href="https://www.your-domain.com/your-page.html" data-layout="button_count">
+    <h1>FBSDK</h1>
+    <button class="FBLogin" onclick="checkLoginState()">登入</button>
+    <button class="FBLogout" onclick="ShareGamePage()">分享頁面</button>
+    <button class="FBLogout" onclick="ShareGameContent()">分享遊戲內容</button>
+    <button class="FBLogout" onclick="logout()">登出</button>
+    <div class="box">
+        <span class="Bear icon-Bear"></span>
+    </div>
+    <div class="box">
+        <span class="Bear icon-haystack"></span>
     </div>
     <script src="./FBSDK.js"></script>
     <script src="./DeviceJudgment.js"></script>

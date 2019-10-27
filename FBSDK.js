@@ -10,7 +10,7 @@ window.fbAsyncInit = () => {
     appId: "727493857721260",
     cookie: true,
     xfbml: true,
-    version: "v2.8"
+    version: "v4.0"
   });
   FB.AppEvents.logPageView()
 };
@@ -85,17 +85,32 @@ const ShareGameContent = (item) => {
     checkLoginState()
 }
 const Share = (item) => {
+    // FB.api('/me/feed', 'post', {
+    //     // app_id: '727493857721260',
+    //     // display: 'iframe',
+    //     // method: 'feed',
+    //     link: 'http://psquare.io/volvo/volvo_asm/index.html',
+    //     picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
+    //     caption: 'Some Caption for the URL',
+    //     description: 'A description for the URL which is to be displayed'
+    // }, function (response) {
+    //     console.log('遊戲頁面內容', response)
+    // });
     FB.ui({
-        app_id: '727493857721260',
-        // display: 'iframe',
-        method: 'feed',
+        method: 'share',
+        display: 'popup',
         link: 'http://psquare.io/volvo/volvo_asm/index.html',
-        picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Goat_01.jpg/270px-Goat_01.jpg',
-        name: 'A Title for Feed Dialog!',
+        picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
         caption: 'Some Caption for the URL',
-        description: 'A description for the URL which is to be displayed'
+        title: 'volvo_asm',
+        description: 'A description for the URL which is to be displayed',
+        message: 'volvo'
     }, function (response) {
-        console.log('遊戲頁面內容', response)
+        if (response && !response.error_message){
+            console.log(response)
+        }else{
+            console.log(response.error)
+        }
     });
 }
 const logout = () => {
