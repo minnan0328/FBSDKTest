@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:url" content="http://psquare.io/volvo/volvo_asm/index.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:og:description" content="A description for the URL which is to be displayed">
+    <meta property="og:title" content="A Title for Feed Dialog!">
+    <meta property="og:image"
+      content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Goat_01.jpg/270px-Goat_01.jpg">
+    <title>Unity WebGL Player | WebGLFitWindow</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Test1.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 1280px; height: 720px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">WebGLFitWindow</div>
+      </div>
+    </div>
+    <script src="./FBSDK.js"></script>
+    <script src="./DeviceJudgment.js"></script>
+  </body>
+</html>
