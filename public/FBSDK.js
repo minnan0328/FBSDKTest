@@ -35,7 +35,7 @@ const checkLoginState = () => {
         login()
       }
       if (response.status === 'connected') {
-        Share()
+        getFBAPI()
       }
       if (response.status === 'unknown'){
         login()
