@@ -31,6 +31,14 @@ window.fbAsyncInit = () => {
 const checkLoginState = () => {
   FB.getLoginStatus((response) => {
       console.log(response.status)
+          var metaList = document.getElementsByTagName("meta");
+          for (var i = 0; i < metaList.length; i++) {
+              if (metaList[i].getAttribute("property") == "og:image") {
+                  metaList[i].content = "https://image.shutterstock.com/image-photo/hands-touching-science-network-connection-260nw-762804589.jpg";
+                  console.log(metaList[i].content)
+              }
+          }
+          console.log(metaList)
       if (response.status === 'not_authorized') {
         login()
       }
@@ -95,6 +103,7 @@ const ShareGameContent = (item) => {
     checkLoginState()
 }
 const Share = (item) => {
+
     FB.ui({
         method: 'feed',
         display: 'iframe',
