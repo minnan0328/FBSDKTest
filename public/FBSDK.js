@@ -34,7 +34,7 @@ const checkLoginState = () => {
           var metaList = document.getElementsByTagName("meta");
           for (var i = 0; i < metaList.length; i++) {
               if (metaList[i].getAttribute("property") == "og:image") {
-                  metaList[i].content = "https://image.shutterstock.com/image-photo/hands-touching-science-network-connection-260nw-762804589.jpg";
+                  metaList[i].content = "https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg";
                   console.log(metaList[i].content)
               }
           }
