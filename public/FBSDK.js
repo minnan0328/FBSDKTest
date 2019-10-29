@@ -99,7 +99,7 @@ const Share = (item) => {
         method: 'feed',
         display: 'iframe',
         link: 'https://minnan0328.github.io/FBSDKTest/public/',
-        picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
+        picture: 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg',
         caption: 'Some Caption for the URL',
         title: 'volvo_asm',
         description: 'A description for the URL which is to be displayed',
