@@ -65,7 +65,7 @@ const getFBAPI = (authResponse) => {
     //   FBdata.FBImage = response.picture.data.url
       console.log(FBdata)
       console.log(response)
-    //   Share()
+      Share()
     }
   )
 };
@@ -131,8 +131,8 @@ const Share = (item) => {
         }
     });
 }
-const logout = () => {
-  FB.logout((response) => {
-    console.log(response)
-  })
-};
+// const logout = () => {
+//   FB.logout((response) => {
+//     console.log(response)
+//   })
+// };
