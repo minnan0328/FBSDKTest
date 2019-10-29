@@ -103,23 +103,29 @@ const ShareGameContent = (item) => {
     checkLoginState()
 }
 const Share = (item) => {
-
-    FB.ui({
-        method: 'feed',
-        display: 'iframe',
-        link: 'https://minnan0328.github.io/FBSDKTest/public/',
-        caption: 'eeeeeeeeeeeee',
-        // picture: 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg',
-        // title: 'aaaaaaaa',
-        // description: 'ssssssssssss',
-        // message: 'volvo',
-        hashtag: '#volvo,#volvo',
-        // obile_iframe: true
-    }, function (response) {
-        if (response && !response.error_message){
-            console.log(response)
-        }else{
-            console.log(response.error)
+    var metaList = document.getElementsByTagName("meta");
+    for (var i = 0; i < metaList.length; i++) {
+        if (metaList[i].getAttribute("property") == "og:image") {
+            if (metaList[i].content != ''){
+                FB.ui({
+                    method: 'feed',
+                    display: 'iframe',
+                    link: 'https://minnan0328.github.io/FBSDKTest/public/',
+                    caption: 'eeeeeeeeeeeee',
+                    // picture: 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg',
+                    // title: 'aaaaaaaa',
+                    // description: 'ssssssssssss',
+                    // message: 'volvo',
+                    hashtag: '#volvo,#volvo',
+                    // obile_iframe: true
+                }, function (response) {
+                    if (response && !response.error_message){
+                        console.log(response)
+                    }else{
+                        console.log(response.error)
+                    }
+                });
+            }
         }
-    });
+    }
 }
