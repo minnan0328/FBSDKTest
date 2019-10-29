@@ -100,9 +100,9 @@ const Share = (item) => {
         display: 'iframe',
         link: 'https://minnan0328.github.io/FBSDKTest/public/',
         picture: 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg',
-        caption: 'Some Caption for the URL',
-        title: 'volvo_asm',
-        description: 'A description for the URL which is to be displayed',
+        caption: 'eeeeeeeeeeeee',
+        title: 'aaaaaaaa',
+        description: 'ssssssssssss',
         message: 'volvo',
         hashtag: '#volvo,#volvo',
         obile_iframe:true
