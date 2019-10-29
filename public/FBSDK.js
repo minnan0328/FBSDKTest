@@ -46,10 +46,8 @@ const checkLoginState = () => {
 
 const login = () => {
   FB.login((response) => {
-      console.log(response)
-      response.status === 'connected' && getFBAPI()
-    },
-    {
+    response.status === 'connected' && getFBAPI()
+    },{
         scope: "public_profile,email",
         auth_type: "rerequest"
     })
@@ -59,13 +57,21 @@ const getFBAPI = (authResponse) => {
   FB.api("/me", 'GET', {
       fields: "id,name,email,picture"
     },(response) => {
-      FBdata.email = response.email
-      FBdata.FBId = response.id
-      FBdata.name = response.name
-    //   FBdata.FBImage = response.picture.data.url
-      console.log(FBdata)
-      console.log(response)
-      Share()
+        if (response){
+            FBdata.email = response.email
+            FBdata.FBId = response.id
+            FBdata.name = response.name
+          //   FBdata.FBImage = response.picture.data.url
+            document.getElementById('message').innerHTML = '登入成功'
+              document.getElementById('FBId').innerText = response.id
+              document.getElementById('name').innerText = response.name
+              document.getElementById('email').innerText = response.email
+            console.log(FBdata)
+            console.log(response)
+            Share()
+        }else{
+            document.getElementById('message').innerHTML = '登入失敗'
+        }
     }
   )
 };
@@ -75,7 +81,7 @@ FB.ui({
     method: 'share_open_graph',
     action_type: 'og.likes',
     action_properties: JSON.stringify({
-        object: 'https://www.mxp.tw/5347/',
+        object: 'https://minnan0328.github.io/FBSDKTest/public/',
     })
 }, function (response) {
     console.log('遊戲頁面分享', response)
@@ -83,15 +89,14 @@ FB.ui({
 }
 
 var GameContent = null
-///未完成分享內容****************************
 const ShareGameContent = (item) => {
     GameContent = item
     checkLoginState()
 }
 var payload = {
     method: 'feed',
-    display: 'popup',
-    link: 'http://psquare.io/volvo/volvo_asm/index.html',
+    display: 'iframe',
+    link: 'https://minnan0328.github.io/FBSDKTest/public/',
     picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
     caption: 'Some Caption for the URL',
     title: 'volvo_asm',
@@ -100,18 +105,6 @@ var payload = {
     hashtag: '#volvo'
 }
 const Share = (item) => {
-    // FB.api('/me/feed', 'post', {
-    //     // app_id: '727493857721260',
-    //     // display: 'iframe',
-    //     // method: 'feed',
-    //     link: 'http://psquare.io/volvo/volvo_asm/index.html',
-    //     picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
-    //     caption: 'Some Caption for the URL',
-    //     description: 'A description for the URL which is to be displayed'
-    // }, function (response) {
-    //     console.log('遊戲頁面內容', response)
-    // });
-
     FB.ui({
         method: 'feed',
         display: 'iframe',
@@ -131,8 +124,3 @@ const Share = (item) => {
         }
     });
 }
-// const logout = () => {
-//   FB.logout((response) => {
-//     console.log(response)
-//   })
-// };

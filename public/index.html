@@ -33,15 +33,13 @@
 
     <h1>FBSDK</h1>
     <!-- <button class="FBLogin" onclick="checkLoginState()">登入</button> -->
+    <!-- <button class="FBLogout" onclick="logout()">登出</button> -->
     <button class="FBLogout" onclick="ShareGamePage()">分享頁面</button>
     <button class="FBLogout" onclick="ShareGameContent()">分享遊戲內容</button>
-    <!-- <button class="FBLogout" onclick="logout()">登出</button> -->
-    <div class="box">
-        <span class="Bear icon-Bear"></span>
-    </div>
-    <div class="box">
-        <span class="Bear icon-haystack"></span>
-    </div>
+    <h1 id="message"></h1>
+    <p>FBId:<p id="FBId"></p></p>
+    <p>FBname:<p id="name"></p></p>
+    <p>FBemail<p id="email"></p></p>
     <script src="./FBSDK.js"></script>
     <script src="./DeviceJudgment.js"></script>
 </body>
