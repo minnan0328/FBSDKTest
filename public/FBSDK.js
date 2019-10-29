@@ -115,7 +115,7 @@ const Share = (item) => {
     FB.ui({
         method: 'feed',
         display: 'iframe',
-        link: 'http://psquare.io/volvo/volvo_asm/index.html',
+        link: 'https://minnan0328.github.io/FBSDKTest/public/',
         picture: 'https://vignette.wikia.nocookie.net/pttpedia/images/7/70/%E6%AD%A3%E8%A6%96%E5%9C%96.jpg/revision/latest?cb=20180705155039&path-prefix=zh',
         caption: 'Some Caption for the URL',
         title: 'volvo_asm',
