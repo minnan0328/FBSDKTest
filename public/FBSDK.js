@@ -27,7 +27,7 @@ window.fbAsyncInit = () => {
   js.src = "https://connect.facebook.net/en_US/sdk.js"
   fjs.parentNode.insertBefore(js, fjs)
 })(document, "script", "facebook-jssdk")
-
+let mataimg = 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg'
 const checkLoginState = () => {
   FB.getLoginStatus((response) => {
       console.log(response.status)
@@ -106,7 +106,7 @@ const Share = (item) => {
     var metaList = document.getElementsByTagName("meta");
     for (var i = 0; i < metaList.length; i++) {
         if (metaList[i].getAttribute("property") == "og:image") {
-            if (metaList[i].content != ''){
+            if (metaList[i].content === mataimg) {
                 FB.ui({
                     method: 'feed',
                     display: 'iframe',
