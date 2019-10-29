@@ -8,7 +8,7 @@ const FBdata = {
 
 window.fbAsyncInit = () => {
   FB.init({
-    appId: "727493857721260",
+    appId: "419957605369378",
     cookie: true,
     xfbml: true,
     version: "v4.0"
@@ -30,11 +30,15 @@ window.fbAsyncInit = () => {
 
 const checkLoginState = () => {
   FB.getLoginStatus((response) => {
+      console.log(response.status)
+      if (response.status === 'not_authorized') {
+        login()
+      }
       if (response.status === 'connected') {
-        getFBAPI()
+        Share()
       }
       if (response.status === 'unknown'){
-          login()
+        login()
       }
   })
 };
@@ -44,7 +48,6 @@ const login = () => {
   FB.login((response) => {
       console.log(response)
       response.status === 'connected' && getFBAPI()
-      response.status === 'not_authorized' && console.log(response.status)
     },
     {
         scope: "public_profile,email",
@@ -59,10 +62,10 @@ const getFBAPI = (authResponse) => {
       FBdata.email = response.email
       FBdata.FBId = response.id
       FBdata.name = response.name
-      FBdata.FBImage = response.picture.data.url
+    //   FBdata.FBImage = response.picture.data.url
       console.log(FBdata)
       console.log(response)
-      Share()
+    //   Share()
     }
   )
 };
@@ -93,7 +96,8 @@ var payload = {
     caption: 'Some Caption for the URL',
     title: 'volvo_asm',
     description: 'A description for the URL which is to be displayed',
-    message: 'volvo'
+    message: 'volvo',
+    hashtag: '#volvo'
 }
 const Share = (item) => {
     // FB.api('/me/feed', 'post', {
@@ -116,7 +120,9 @@ const Share = (item) => {
         caption: 'Some Caption for the URL',
         title: 'volvo_asm',
         description: 'A description for the URL which is to be displayed',
-        message: 'volvo'
+        message: 'volvo',
+        hashtag: '#volvo,#volvo',
+        obile_iframe:true
     }, function (response) {
         if (response && !response.error_message){
             console.log(response)
