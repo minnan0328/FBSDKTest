@@ -27,6 +27,7 @@ window.fbAsyncInit = () => {
   js.src = "https://connect.facebook.net/en_US/sdk.js"
   fjs.parentNode.insertBefore(js, fjs)
 })(document, "script", "facebook-jssdk")
+ //https://pic4.zhimg.com/v2-3be05963f5f3753a8cb75b6692154d4a_1200x500.jpg
 let mataimg = 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg'
 const checkLoginState = () => {
   FB.getLoginStatus((response) => {
