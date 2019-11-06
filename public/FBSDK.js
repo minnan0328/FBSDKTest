@@ -8,7 +8,7 @@ const FBdata = {
 
 window.fbAsyncInit = () => {
   FB.init({
-    appId: "727493857721260",
+    appId: "1366604616846064",
     cookie: true,
     xfbml: true,
     version: "v4.0"
@@ -36,7 +36,7 @@ const checkLoginState = () => {
           for (var i = 0; i < metaList.length; i++) {
               if (metaList[i].getAttribute("property") == "og:image") {
                   metaList[i].content = "https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg";
-                  console.log(metaList[i].content)
+                  console.log(metaList[i])
               }
           }
           console.log(metaList)
