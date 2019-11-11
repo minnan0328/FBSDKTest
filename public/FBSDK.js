@@ -38,6 +38,7 @@ const checkLoginState = () => {
 
 const ShareGamePage = () => {
   FB.ui({
+      app_id: '1366604616846064',
       method: 'share',
       // display: 'iframe',
       href: 'https://minnan0328.github.io/FBSDKTest/public/',
@@ -81,6 +82,7 @@ const getFBAPI = () => {
 }
 const Share = () => {
   FB.ui({
+      app_id: '1366604616846064',
       method: 'share',
       // display: 'iframe',
       href: 'https://minnan0328.github.io/FBSDKTest/public/',
