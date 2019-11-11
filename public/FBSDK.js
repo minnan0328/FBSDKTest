@@ -105,3 +105,20 @@ const Share = () => {
   });
 
 }
+
+
+/*
+
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="fb:app_id" content="1366604616846064" />
+    <meta property="og:url" content="https://minnan0328.github.io/FBSDKTest/public/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="volvo test description">
+    <meta property="og:title" content="volvo test title">
+    <meta property="og:image"
+      content="https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg">
+ */
