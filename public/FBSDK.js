@@ -88,14 +88,12 @@ const getFBAPI = () => {
 
 const ShareGamePage = () => {
 FB.ui({
-    method: 'share_open_graph',
-    action_type: 'og.likes',
-    action_properties: JSON.stringify({
-        object: 'https://minnan0328.github.io/FBSDKTest/public/',
-    })
-}, function (response) {
-    console.log('遊戲頁面分享', response)
-});
+    method: 'share',
+    href: 'https://minnan0328.github.io/FBSDKTest/public/',
+    hashtag: '#volvossvolvo111',
+    quote: `quote testsdsffsfdsfdsfdsfd
+        sdfdsfffsfsfd`
+}, function (response) {});
 }
 
 var GameContent = null
@@ -112,12 +110,8 @@ const Share = (item) => {
                     method: 'feed',
                     display: 'iframe',
                     link: 'https://minnan0328.github.io/FBSDKTest/public/',
-                    caption: 'eeeeeeeeeeeee',
-                    // picture: 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg',
-                    // title: 'aaaaaaaa',
-                    // description: 'ssssssssssss',
-                    // message: 'volvo',
-                    hashtag: '#volvo,#volvo',
+                    hashtag: '#volvossvolvo111',
+                    // hashtag: ["123","456"],
                     // obile_iframe: true
                 }, function (response) {
                     if (response && !response.error_message){
