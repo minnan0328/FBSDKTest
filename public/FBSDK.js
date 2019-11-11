@@ -39,6 +39,7 @@ const checkLoginState = () => {
 const ShareGamePage = () => {
   FB.ui({
       method: 'share',
+      display: 'popup',
       href: 'https://minnan0328.github.io/FBSDKTest/public/',
       hashtag: '#volvo',
   }, function (response) {
@@ -81,7 +82,7 @@ const getFBAPI = () => {
 const Share = () => {
   FB.ui({
       method: 'feed',
-      display: 'iframe',
+      display: 'popup',
       link: 'https://minnan0328.github.io/FBSDKTest/public/',
       hashtag: '#volvo',
   }, function (response) {
