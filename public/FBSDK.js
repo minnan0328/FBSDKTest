@@ -83,7 +83,7 @@ const Share = () => {
   FB.ui({
       method: 'share',
       // display: 'iframe',
-      link: 'https://minnan0328.github.io/FBSDKTest/public/',
+      href: 'https://minnan0328.github.io/FBSDKTest/public/',
       hashtag: '#volvo',
   }, function (response) {
       if (response && !response.error_message){
