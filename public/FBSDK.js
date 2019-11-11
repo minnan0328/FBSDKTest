@@ -1,4 +1,3 @@
-// import axios from 'axios'
 const FBdata = {
   email: String,
   FBId: String,
@@ -27,100 +26,71 @@ window.fbAsyncInit = () => {
   js.src = "https://connect.facebook.net/en_US/sdk.js"
   fjs.parentNode.insertBefore(js, fjs)
 })(document, "script", "facebook-jssdk")
- //https://pic4.zhimg.com/v2-3be05963f5f3753a8cb75b6692154d4a_1200x500.jpg
-let mataimg = 'https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg'
+
+
 const checkLoginState = () => {
-  FB.getLoginStatus((response) => {
-      console.log(response.status)
-          var metaList = document.getElementsByTagName("meta");
-          for (var i = 0; i < metaList.length; i++) {
-              if (metaList[i].getAttribute("property") == "og:image") {
-                  metaList[i].content = "https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg";
-                  console.log(metaList[i])
-              }
-          }
-          console.log(metaList)
-      if (response.status === 'not_authorized') {
-        login()
-      }
-      if (response.status === 'connected') {
-        getFBAPI()
-      }
-      if (response.status === 'unknown'){
-        login()
-      }
-  })
+
 };
 
 
-const login = () => {
-  FB.login((response) => {
-    response.status === 'connected' && getFBAPI()
-    },{
-        scope: "public_profile,email",
-        auth_type: "rerequest"
-    })
-};
 
-const getFBAPI = () => {
-  FB.api("/me", 'GET', {
-      fields: "id,name,email,picture"
-    },(response) => {
-        console.log(response)
-        if (response){
-            FBdata.email = response.email
-            FBdata.FBId = response.id
-            FBdata.name = response.name
-          //   FBdata.FBImage = response.picture.data.url
-            // document.getElementById('message').innerHTML = '登入成功'
-            // document.getElementById('FBId').innerText = response.id
-            // document.getElementById('name').innerText = response.name
-            // document.getElementById('email').innerText = response.email
-            console.log(FBdata)
-            console.log(response)
-            Share()
-        }else{
-            document.getElementById('message').innerHTML = '登入失敗'
-        }
-    }
-  )
-};
+
+
 
 const ShareGamePage = () => {
-FB.ui({
-    method: 'share',
-    href: 'https://minnan0328.github.io/FBSDKTest/public/',
-    hashtag: '#volvossvolvo111',
-    quote: `quote testsdsffsfdsfdsfdsfd
-        sdfdsfffsfsfd`
-}, function (response) {});
+  FB.ui({
+      method: 'share',
+      href: 'https://minnan0328.github.io/FBSDKTest/public/',
+      hashtag: '#volvo',
+  }, function (response) {
+      console.l0g(response)
+  })
 }
 
 var GameContent = null
-const ShareGameContent = (item) => {
-    GameContent = item
-    checkLoginState()
-}
-const Share = (item) => {
-    var metaList = document.getElementsByTagName("meta");
-    for (var i = 0; i < metaList.length; i++) {
-        if (metaList[i].getAttribute("property") == "og:image") {
-            if (metaList[i].content === mataimg) {
-                FB.ui({
-                    method: 'feed',
-                    display: 'iframe',
-                    link: 'https://minnan0328.github.io/FBSDKTest/public/',
-                    hashtag: '#volvossvolvo111',
-                    // hashtag: ["123","456"],
-                    // obile_iframe: true
-                }, function (response) {
-                    if (response && !response.error_message){
-                        console.log(response)
-                    }else{
-                        console.log(response.error)
-                    }
-                });
-            }
-        }
+const ShareGameContent = () => {
+  FB.getLoginStatus((response) => {
+    if (response.status === 'not_authorized' || response.status === 'unknown') {
+        FB.login((response) => {
+          console.l0g(response)
+          response.status === 'connected' && getFBAPI()
+        }, {
+          scope: "public_profile,email",
+          auth_type: "rerequest"
+        })
     }
+    if (response.status === 'connected') {
+      getFBAPI()
+    }
+  })
+}
+const getFBAPI = () => {
+  FB.api("/me", 'GET', {
+    fields: "id,name,email,picture"
+  }, (response) => {
+      if (response) {
+        FBdata.email = response.email
+        FBdata.FBId = response.id
+        FBdata.name = response.name
+        Share()
+      } else {
+        console.log(response)
+      }
+    }
+  )
+}
+const Share = () => {
+  FB.ui({
+      method: 'feed',
+      display: 'iframe',
+      link: 'https://minnan0328.github.io/FBSDKTest/public/',
+      hashtag: '#volvo',
+  }, function (response) {
+      if (response && !response.error_message){
+          console.log(response)
+      }else{
+          console.log(response.error)
+      }
+  });
+
 }
