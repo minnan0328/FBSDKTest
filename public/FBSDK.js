@@ -87,19 +87,23 @@ const Share = () => {
   }, function (response) {
       if (response && !response.error_message){
         let payload = {
-          data: FBData,
+          FacebookEmail:FBData.FacebookEmail,
+          FacebookId: FBData.FacebookId,
+          FacebookName:FBData.FacebookName,
           result: "success"
         }
-          console.log(payload)
-          gameInstance.SendMessage("Root", "FromHtml_obj", payload)
+          console.log(JSON.stringify(payload))
+          gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
       }else{
         if (response.error_message){
           let payload = {
-            data: null,
+            FacebookEmail: null,
+            FacebookId: null,
+            FacebookName: null,
             result: "lose"
           }
-          console.log(payload)
-          gameInstance.SendMessage("Root", "FromHtml_obj", payload)
+          console.log(JSON.stringify(payload))
+          gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
         }
       }
   });
