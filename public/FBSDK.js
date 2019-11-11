@@ -72,10 +72,10 @@ const getFBAPI = () => {
             FBdata.FBId = response.id
             FBdata.name = response.name
           //   FBdata.FBImage = response.picture.data.url
-            document.getElementById('message').innerHTML = '登入成功'
-            document.getElementById('FBId').innerText = response.id
-            document.getElementById('name').innerText = response.name
-            document.getElementById('email').innerText = response.email
+            // document.getElementById('message').innerHTML = '登入成功'
+            // document.getElementById('FBId').innerText = response.id
+            // document.getElementById('name').innerText = response.name
+            // document.getElementById('email').innerText = response.email
             console.log(FBdata)
             console.log(response)
             Share()
