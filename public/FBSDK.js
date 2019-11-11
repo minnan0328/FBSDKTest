@@ -1,8 +1,7 @@
-const FBdata = {
-  email: String,
-  FBId: String,
-  name: String,
-  FBImage: String
+var FBData = {
+  FacebookEmail: String,
+  FacebookId: String,
+  FacebookName: String
 };
 
 window.fbAsyncInit = () => {
@@ -43,7 +42,7 @@ const ShareGamePage = () => {
       href: 'https://minnan0328.github.io/FBSDKTest/public/',
       hashtag: '#volvo',
   }, function (response) {
-      console.l0g(response)
+      console.log(response)
   })
 }
 
@@ -52,7 +51,7 @@ const ShareGameContent = () => {
   FB.getLoginStatus((response) => {
     if (response.status === 'not_authorized' || response.status === 'unknown') {
         FB.login((response) => {
-          console.l0g(response)
+          console.log(response)
           response.status === 'connected' && getFBAPI()
         }, {
           scope: "public_profile,email",
@@ -69,9 +68,9 @@ const getFBAPI = () => {
     fields: "id,name,email,picture"
   }, (response) => {
       if (response) {
-        FBdata.email = response.email
-        FBdata.FBId = response.id
-        FBdata.name = response.name
+        FBData.FacebookEmail = response.email
+        FBData.FacebookId = response.id
+        FBData.FacebookName = response.name
         Share()
       } else {
         console.log(response)
@@ -87,9 +86,21 @@ const Share = () => {
       hashtag: '#volvo',
   }, function (response) {
       if (response && !response.error_message){
-          console.log(response)
+        let payload = {
+          data: FBData,
+          result: "success"
+        }
+          console.log(payload)
+          gameInstance.SendMessage("Root", "FromHtml_obj", payload)
       }else{
-          console.log(response.error)
+        if (response.error_message){
+          let payload = {
+            data: null,
+            result: "lose"
+          }
+          console.log(payload)
+          gameInstance.SendMessage("Root", "FromHtml_obj", payload)
+        }
       }
   });
 
