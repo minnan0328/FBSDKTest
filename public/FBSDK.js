@@ -9,7 +9,7 @@ window.fbAsyncInit = () => {
     appId: "1366604616846064",
     cookie: true,
     xfbml: true,
-    version: "v4.0"
+    version: "v5.0"
   });
   FB.AppEvents.logPageView()
 };
@@ -43,15 +43,15 @@ const ShareGameContent = () => {
   FB.getLoginStatus((response) => {
     console.log(response)
     if (response.status === 'connected') {
-      Share()
+      getFBAPI()
     }else{
-        FB.login((response) => {
-          console.log(response)
-          response.status === 'connected' && Share()
-        }, {
-          scope: "public_profile,email",
-          auth_type: "rerequest"
-        })
+        // FB.login((response) => {
+        //   console.log(response)
+        //   response.status === 'connected' && Share()
+        // }, {
+        //   scope: "public_profile,email",
+        //   auth_type: "rerequest"
+        // })
     }
   })
 }
