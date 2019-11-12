@@ -39,20 +39,19 @@ const ShareGamePage = () => {
   })
 }
 
-var GameContent = null
 const ShareGameContent = () => {
   FB.getLoginStatus((response) => {
     if (response.status === 'not_authorized' || response.status === 'unknown') {
         FB.login((response) => {
           console.log(response)
-          response.status === 'connected' && getFBAPI()
+          // response.status === 'connected' && getFBAPI()
         }, {
           scope: "public_profile,email",
           auth_type: "rerequest"
         })
-    }
-    if (response.status === 'connected') {
-      getFBAPI()
+    // }
+    // if (response.status === 'connected') {
+    //   getFBAPI()
     }
   })
 }
@@ -85,7 +84,7 @@ const Share = () => {
         let payload = {
           FacebookEmail:FBData.FacebookEmail,
           FacebookId: FBData.FacebookId,
-          FacebookName: unescape(FBData.FacebookName),
+          FacebookName: escape(FBData.FacebookName),
           result: "success"
         }
           gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
