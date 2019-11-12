@@ -41,7 +41,10 @@ const ShareGamePage = () => {
 
 const ShareGameContent = () => {
   FB.getLoginStatus((response) => {
-    if (response.status === 'not_authorized' || response.status === 'unknown') {
+    console.log(response)
+    if (response.status === 'connected') {
+      Share()
+    }else{
         FB.login((response) => {
           console.log(response)
           response.status === 'connected' && Share()
@@ -49,9 +52,6 @@ const ShareGameContent = () => {
           scope: "public_profile,email",
           auth_type: "rerequest"
         })
-    // }
-    // if (response.status === 'connected') {
-    //   getFBAPI()
     }
   })
 }
