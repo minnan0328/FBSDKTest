@@ -27,15 +27,6 @@ window.fbAsyncInit = () => {
 })(document, "script", "facebook-jssdk")
 
 
-const checkLoginState = () => {
-
-};
-
-
-
-
-
-
 const ShareGamePage = () => {
   FB.ui({
       app_id: '1366604616846064',
@@ -69,7 +60,7 @@ const getFBAPI = () => {
   FB.api("/me", 'GET', {
     fields: "id,name,email,picture"
   }, (response) => {
-      if (response) {
+      if (response) {        
         FBData.FacebookEmail = response.email
         FBData.FacebookId = response.id
         FBData.FacebookName = response.name
@@ -89,13 +80,14 @@ const Share = () => {
       hashtag: '#volvo',
   }, function (response) {
       if (response && !response.error_message){
+        console.log(escape("成功"))
+        console.log(escape("Jason Tsai"))
         let payload = {
           FacebookEmail:FBData.FacebookEmail,
           FacebookId: FBData.FacebookId,
-          FacebookName:FBData.FacebookName,
+          FacebookName: unescape(FBData.FacebookName),
           result: "success"
         }
-          console.log(JSON.stringify(payload))
           gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
       }else{
         if (response.error_message){
@@ -105,7 +97,6 @@ const Share = () => {
             FacebookName: null,
             result: "lose"
           }
-          console.log(JSON.stringify(payload))
           gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
         }
       }
