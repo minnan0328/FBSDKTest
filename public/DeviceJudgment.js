@@ -28,5 +28,5 @@
     })
     console.log(WhatSystem)
     console.log(MobileType)
-    gameInstance.SendMessage("Root", "FromHtml_str", `${MobileType}`)
+    // gameInstance.SendMessage("Root", "FromHtml_str", `${MobileType}`)
 })()
