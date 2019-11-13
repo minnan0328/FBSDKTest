@@ -46,7 +46,7 @@ const getFBAPI = () => {
         FBData.FacebookId = response.id
         FBData.FacebookName = response.name
         // Share()
-        console.lolg(FBData);
+        console.log(FBData);
       } else {
         console.log(response)
       }
