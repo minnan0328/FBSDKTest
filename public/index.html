@@ -14,32 +14,10 @@
     <meta property="og:image"
       content="https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg">
     <title>SafetyGame</title>
-    <style>
-      .ShareGameBtn{
-        width: 100%;
-        height: 30px;
-        background-color: aliceblue;
-        color: black;
-        position: relative;
-        margin: 20px 20px;
-      }
-    </style>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.javascript"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/SafeGame_v09.json", {onProgress: UnityProgress});
-    </script>
 </head>
 <body>
-<div class="webgl-content">
-    <div id="gameContainer" style="width: 1280px; height: 720px"></div>
-  </div>
   <button class="ShareGameBtn" onclick="ShareGamePage()">ＨＴＭＬ按鈕分享連結</button>
   <button class="ShareGameBtn" onclick="ShareGameContent()">ＨＴＭＬ按鈕登入分享連結</button>
-<div class="simmer">template by: <a href="https://simmer.io" target="_blank">SIMMER.io</a></div>
-<script src="TemplateData/responsive.javascript"></script>
 <script src="./FBSDK.js"></script>
 <script src="./DeviceJudgment.js"></script>
 </body>

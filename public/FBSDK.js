@@ -9,9 +9,15 @@ window.fbAsyncInit = () => {
     appId: "1366604616846064",
     cookie: true,
     xfbml: true,
-    version: "v5.0"
+    version: "v5.0",
+    status: true
   });
   FB.AppEvents.logPageView()
+  FB.getLoginStatus(function (response) {
+    if (response.status === 'connected') {
+      getFBAPI()
+    }
+  });
 };
 
 ((d, s, id) => {
@@ -27,34 +33,6 @@ window.fbAsyncInit = () => {
 })(document, "script", "facebook-jssdk")
 
 
-const ShareGamePage = () => {
-  FB.ui({
-      app_id: '1366604616846064',
-      method: 'share',
-      // display: 'iframe',
-      href: 'https://minnan0328.github.io/FBSDKTest/public/',
-      hashtag: '#volvo',
-  }, function (response) {
-      console.log(response)
-  })
-}
-
-const ShareGameContent = () => {
-  FB.getLoginStatus((response) => {
-    console.log(response)
-    if (response.status === 'connected') {
-      getFBAPI()
-    }else{
-        // FB.login((response) => {
-        //   console.log(response)
-        //   response.status === 'connected' && Share()
-        // }, {
-        //   scope: "public_profile,email",
-        //   auth_type: "rerequest"
-        // })
-    }
-  })
-}
 const getFBAPI = () => {
   FB.api("/me", 'GET', {
     fields: "id,name,email,picture"
@@ -63,45 +41,68 @@ const getFBAPI = () => {
         FBData.FacebookEmail = response.email
         FBData.FacebookId = response.id
         FBData.FacebookName = response.name
-        Share()
+        // Share()
+        console.lolg(FBData);
       } else {
         console.log(response)
       }
     }
   )
 }
-const Share = () => {
+
+const ShareGamePage = () => {
   FB.ui({
       app_id: '1366604616846064',
       method: 'share',
-      // display: 'iframe',
+      display: 'iframe',
       href: 'https://minnan0328.github.io/FBSDKTest/public/',
       hashtag: '#volvo',
   }, function (response) {
-      if (response && !response.error_message){
-        console.log(escape("成功"))
-        console.log(escape("Jason Tsai"))
+      console.log(response)
+  })
+}
+
+const ShareGameContent = () => {
+  FB.ui(
+    {
+      app_id: "1366604616846064",
+      method: "share",
+      display: "iframe",
+      href: "https://minnan0328.github.io/FBSDKTest/public/",
+      hashtag: "#volvo"
+    },
+    function(response) {
+      if (response && !response.error_message) {
         let payload = {
-          FacebookEmail:FBData.FacebookEmail,
+          FacebookEmail: FBData.FacebookEmail,
           FacebookId: FBData.FacebookId,
           FacebookName: escape(FBData.FacebookName),
           result: "success"
-        }
-          gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
-      }else{
-        if (response.error_message){
+        };
+        // gameInstance.SendMessage(
+        //   "Root",
+        //   "FromHtml_obj",
+        //   JSON.stringify(payload)
+        // );
+      } else {
+        if (response.error_message) {
           let payload = {
             FacebookEmail: null,
             FacebookId: null,
             FacebookName: null,
             result: "lose"
-          }
-          gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+          };
+          // gameInstance.SendMessage(
+          //   "Root",
+          //   "FromHtml_obj",
+          //   JSON.stringify(payload)
+          // );
         }
       }
-  });
-
-}
+      console.lolg(payload);
+    }
+  );
+};
 
 
 /*
