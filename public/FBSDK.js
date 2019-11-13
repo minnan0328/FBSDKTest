@@ -36,6 +36,19 @@ window.fbAsyncInit = () => {
   fjs.parentNode.insertBefore(js, fjs)
 })(document, "script", "facebook-jssdk")
 
+const sendUserFBData = () => {
+  let payload = {
+    FacebookEmail: FBData.FacebookEmail,
+    FacebookId: FBData.FacebookId,
+    FacebookName: escape(FBData.FacebookName),
+    result: "success"
+  };
+  gameInstance.SendMessage(
+    "Root",
+    "FromHtml_obj",
+    JSON.stringify(payload)
+  );
+}
 
 const getFBAPI = () => {
   FB.api("/me", 'GET', {
@@ -55,6 +68,7 @@ const getFBAPI = () => {
 
 const ShareGamePage = () => {
   document.getElementById('ShareGamePage').innerHTML = 'Share Game Page'
+  console.log('JS:Share Game Page')
   FB.ui({
     app_id: '1366604616846064',
     method: 'share',
@@ -67,6 +81,7 @@ const ShareGamePage = () => {
 }
 
 const ShareGameContent = () => {
+  console.log('JS:Share Game Content')
   document.getElementById('ShareGameContent').innerHTML = 'Share Game Content'
   FB.ui({
       app_id: "1366604616846064",
