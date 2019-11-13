@@ -16,6 +16,10 @@ window.fbAsyncInit = () => {
   FB.getLoginStatus(function (response) {
     if (response.status === 'connected') {
       getFBAPI()
+    }else{
+      FB.login(function(response) {
+        console.log(response);
+      });
     }
   });
 };
