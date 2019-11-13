@@ -88,6 +88,7 @@ const ShareGameContent = () => {
         //   "FromHtml_obj",
         //   JSON.stringify(payload)
         // );
+        console.lolg(payload);
       } else {
         if (response.error_message) {
           let payload = {
@@ -101,9 +102,9 @@ const ShareGameContent = () => {
           //   "FromHtml_obj",
           //   JSON.stringify(payload)
           // );
+          console.lolg(payload);
         }
       }
-      console.lolg(payload);
     }
   );
 };
