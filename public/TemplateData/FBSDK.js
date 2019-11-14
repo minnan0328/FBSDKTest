@@ -90,7 +90,7 @@ function SendShareGameContent() {
     app_id: "1366604616846064",
     method: "share",
     display: "iframe",
-    redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+    redirect_uri: 'https://minnan0328.github.io/FBSDKTest/public/',
     href: "https://minnan0328.github.io/Volvo-Game/",
     hashtag: "#volvo"
   }, function (response) {
@@ -129,7 +129,7 @@ function clickShare() {
     app_id: '1366604616846064',
     method: 'share',
     display: 'iframe',
-    redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+    redirect_uri: 'https://minnan0328.github.io/FBSDKTest/public/',
     href: 'https://minnan0328.github.io/Volvo-Game/',
     hashtag: '#volvo',
   }, function (response) {
