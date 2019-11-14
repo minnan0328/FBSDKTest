@@ -4,15 +4,22 @@ var express = require('express');
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
-var Admin = require('./user')
+var FBAPI = require('./FBAPI')
 var app = express();
+const IP = '192.168.0.13';
+const Port = '8000';
 const options = {
     key: fs.readFileSync('./https/client-key.pem'),
     ca: [fs.readFileSync('./https/cert.pem')],
     cert: fs.readFileSync('./https/client-cert.pem')
 };
 var server = https.createServer(options, app)
-app.use('/admin', Admin)
+app.use(
+    express.urlencoded({
+        extended: false
+    })
+)
+app.use('/api', FBAPI)
 app.set('public', path.join(__dirname, './public'))
 app.engine('html', require('ejs').renderFile)
 app.set('dist engine', 'html')
@@ -47,10 +54,10 @@ app.use(function (err, req, res, next) {
     // res.render('error')
 })
 
-server.listen(8000, function () {
+server.listen(Port,IP, function () {
     var host = server.address().address
     var port = server.address().port
 
-    console.log("应用实例，访问地址为 http://%s:%s", host, port)
+    console.log("http://%s:%s", host, port)
 });
 module.exports = app

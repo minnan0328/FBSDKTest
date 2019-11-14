@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
     <meta http-equiv="expires" content="0">
@@ -12,16 +12,23 @@
     <meta property="og:description" content="volvo test description">
     <meta property="og:title" content="volvo test title">
     <meta property="og:image"
-      content="https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg">
+        content="https://exfast.me/wp-content/uploads/2019/04/1554182762-cddf42691119d44059a16a4095047a33-1140x600.jpg">
     <title>SafetyGame</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.javascript"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/safetygame.json", {onProgress: UnityProgress});
+    </script>
 </head>
 <body>
-  <button class="ShareGameBtn" onclick="ShareGamePage()">ＨＴＭＬ按鈕分享連結</button>
-  <button class="ShareGameBtn" onclick="ShareGameContent()">ＨＴＭＬ按鈕登入分享連結</button>
-  <h1 id="ShareGamePage">123</h1>
-  <h1 id="ShareGameContent">345</h1>
-  <a href="https://www.facebook.com/dialog/share?app_id=1366604616846064&display=popup&href=https%3A%2F%2Fminnan0328.github.io%2FFBSDKTest%2Fpublic%2F">ssss</a>
-<script src="./FBSDK.js"></script>
-<script src="./DeviceJudgment.js"></script>
+<div class="webgl-content">
+    <div id="gameContainer" style="width: 1280px; height: 720px"></div>
+</div>
+<div class="simmer">template by: <a href="https://simmer.io" target="_blank">SIMMER.io</a></div>
+<script src="TemplateData/responsive.javascript"></script>
+<script src="./TemplateData/FBSDK.js"></script>
+<script src="./TemplateData/DeviceJudgment.js"></script>
 </body>
 </html>

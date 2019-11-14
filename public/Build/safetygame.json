@@ -1,0 +1,14 @@
+{
+"companyName": "shinn",
+"productName": "SafetyGame",
+"dataUrl": "safetygame.data.unityweb",
+"asmCodeUrl": "safetygame.asm.code.unityweb",
+"asmMemoryUrl": "safetygame.asm.memory.unityweb",
+"asmFrameworkUrl": "safetygame.asm.framework.unityweb",
+"TOTAL_MEMORY": 134217728,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#211F20",
+"cacheControl": {"default": "must-revalidate"}
+}
