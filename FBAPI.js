@@ -122,7 +122,18 @@ function SendShareGameContent() {
     })
 }
 
-
+function clickShare(){
+    FB.ui({
+    app_id: '1366604616846064',
+    method: 'share',
+    display: 'iframe',
+    redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+    href: 'https://minnan0328.github.io/Volvo-Game/',
+    hashtag: '#volvo',
+    }, function (response) {
+    console.log(response)
+    })
+}
 
 // const ShareGamePage = () => {
 //   FB.ui({
