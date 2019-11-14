@@ -82,7 +82,7 @@ function sendFBDataForUnity() {
     FacebookName: escape(FBData.FacebookName),
     result: "success"
   };
-  gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+  // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
 }
 
 function SendShareGameContent() {
@@ -101,7 +101,7 @@ function SendShareGameContent() {
         FacebookName: escape(FBData.FacebookName),
         result: "success"
       };
-      gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+      // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
       console.log('success', payload);
     } else {
       if (response.error_message) {
@@ -111,11 +111,11 @@ function SendShareGameContent() {
           FacebookName: null,
           result: "lose"
         }
-        gameInstance.SendMessage(
-          "Root",
-          "FromHtml_obj",
-          JSON.stringify(payload)
-        );
+        // gameInstance.SendMessage(
+        //   "Root",
+        //   "FromHtml_obj",
+        //   JSON.stringify(payload)
+        // );
         console.log('error_message', payload);
       }
     }
