@@ -1,4 +1,3 @@
-// const axios = require('axios').default;
 var FBData = {
   FacebookEmail: String,
   FacebookId: String,
@@ -16,43 +15,36 @@ window.fbAsyncInit = () => {
   FB.AppEvents.logPageView()
 };
 
-// ((d, s, id) => {
-//   var js,
-//     fjs = d.getElementsByTagName(s)[0]
-//   if (d.getElementById(id)) {
-//     return;
-//   }
-//   js = d.createElement(s)
-//   js.id = id
-//   js.src = "https://connect.facebook.net/en_US/sdk.js"
-//   fjs.parentNode.insertBefore(js, fjs)
-// })(document, "script", "facebook-jssdk")
+((d, s, id) => {
+  var js,
+    fjs = d.getElementsByTagName(s)[0]
+  if (d.getElementById(id)) {
+    return;
+  }
+  js = d.createElement(s)
+  js.id = id
+  js.src = "https://connect.facebook.net/en_US/sdk.js"
+  fjs.parentNode.insertBefore(js, fjs)
+})(document, "script", "facebook-jssdk")
 
-const sendUserFBData = () => {
+function getLoginStatus(type) {
   FB.getLoginStatus(function (response) {
     console.log(response)
     if (response.status === 'connected') {
-      getFBAPI()
+      getFBAPI(type)
     } else {
       FB.login(function (response) {
         console.log(response);
+        if (response.status === 'connected') {
+          getFBAPI(type)
+        }
       });
+
     }
   });
-  let payload = {
-    FacebookEmail: FBData.FacebookEmail,
-    FacebookId: FBData.FacebookId,
-    FacebookName: escape(FBData.FacebookName),
-    result: "success"
-  };
-  gameInstance.SendMessage(
-    "Root",
-    "FromHtml_obj",
-    JSON.stringify(payload)
-  );
 }
 
-const getFBAPI = () => {
+function getFBAPI(type) {
   FB.api("/me", 'GET', {
     fields: "id,name,email,picture"
   }, (response) => {
@@ -60,7 +52,14 @@ const getFBAPI = () => {
       FBData.FacebookEmail = response.email
       FBData.FacebookId = response.id
       FBData.FacebookName = response.name
-      // Share()
+      switch (type) {
+        case 'sendUserFBData':
+          sendUserFBData()
+          break
+        case 'ShareGameContent':
+          SendShareGameContent()
+          break
+      }
       console.log(FBData);
     } else {
       console.log(response)
@@ -68,80 +67,89 @@ const getFBAPI = () => {
   })
 }
 
-const ShareGamePage = () => {
+function sendUserFBData() {
+  getLoginStatus('sendUserFBData')
+}
+
+function ShareGameContent() {
+  getLoginStatus('ShareGameContent')
+}
+
+function sendFBDataForUnity() {
+  let payload = {
+    FacebookEmail: FBData.FacebookEmail,
+    FacebookId: FBData.FacebookId,
+    FacebookName: escape(FBData.FacebookName),
+    result: "success"
+  };
+  gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+}
+
+function SendShareGameContent() {
+  FB.ui({
+    app_id: "1366604616846064",
+    method: "share",
+    display: "iframe",
+    redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+    href: "https://minnan0328.github.io/Volvo-Game/",
+    hashtag: "#volvo"
+  }, function (response) {
+    if (response && !response.error_message) {
+      let payload = {
+        FacebookEmail: FBData.FacebookEmail,
+        FacebookId: FBData.FacebookId,
+        FacebookName: escape(FBData.FacebookName),
+        result: "success"
+      };
+      gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+      console.log('success', payload);
+    } else {
+      if (response.error_message) {
+        let payload = {
+          FacebookEmail: null,
+          FacebookId: null,
+          FacebookName: null,
+          result: "lose"
+        }
+        gameInstance.SendMessage(
+          "Root",
+          "FromHtml_obj",
+          JSON.stringify(payload)
+        );
+        console.log('error_message', payload);
+      }
+    }
+  })
+}
+
+
+
+function clickShare() {
   FB.ui({
     app_id: '1366604616846064',
     method: 'share',
     display: 'iframe',
-    href: 'https://minnan0328.github.io/FBSDKTest/public/',
+    redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+    href: 'https://minnan0328.github.io/Volvo-Game/',
     hashtag: '#volvo',
   }, function (response) {
     console.log(response)
   })
   console.log('JS:Share Game Page')
 }
-
-const ShareGameContent = () => {
-  fetch('https://192.168.0.13:8000/api/getFBData')
-    .then((response) => {
-      // 這裡會得到一個 ReadableStream 的物件
-      console.log(response);
-      // 可以透過 blob(), json(), text() 轉成可用的資訊
-      // return response.json();
-    }).catch((err) => {
-      console.log('錯誤:', err);
-    });
-  // FB.getLoginStatus(function (response) {
-  //   if (response.status === 'connected') {
-  //     getFBAPI()
-  //   } else {
-  //     FB.login(function (response) {
-  //       console.log(response);
-  //     });
-  //   }
-  // });
-  // FB.ui({
-  //     app_id: "1366604616846064",
-  //     method: "share",
-  //     display: "iframe",
-  //     href: "https://minnan0328.github.io/FBSDKTest/public/",
-  //     hashtag: "#volvo"
-  //   },
-  //   function (response) {
-  //     if (response && !response.error_message) {
-  //       let payload = {
-  //         FacebookEmail: FBData.FacebookEmail,
-  //         FacebookId: FBData.FacebookId,
-  //         FacebookName: escape(FBData.FacebookName),
-  //         result: "success"
-  //       };
-  //       gameInstance.SendMessage(
-  //         "Root",
-  //         "FromHtml_obj",
-  //         JSON.stringify(payload)
-  //       );
-  //       console.log(payload);
-  //     } else {
-  //       if (response.error_message) {
-  //         let payload = {
-  //           FacebookEmail: null,
-  //           FacebookId: null,
-  //           FacebookName: null,
-  //           result: "lose"
-  //         };
-  //         gameInstance.SendMessage(
-  //           "Root",
-  //           "FromHtml_obj",
-  //           JSON.stringify(payload)
-  //         );
-  //         console.log(payload);
-  //       }
-  //     }
-  //   }
-  // );
-};
-
-
+// const ShareGamePage = () => {
+//   FB.ui({
+//     app_id: '1366604616846064',
+//     method: 'share',
+//     display: 'iframe',
+//     redirect_uri: 'https://minnan0328.github.io/Volvo-Game/',
+//     href: 'https://minnan0328.github.io/Volvo-Game/',
+//     hashtag: '#volvo',
+//   }, function (response) {
+//     console.log(response)
+//   })
+//   console.log('JS:Share Game Page')
+// }
 /*
 
     <meta charset="utf-8">
