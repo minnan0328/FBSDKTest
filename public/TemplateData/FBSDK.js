@@ -132,12 +132,10 @@ function SendShareGameContent() {
   }, function (response) {
     if (response.error_code === 4201) {
       document.getElementById('ShareState').innerText = '分享失敗'
-      let payload = {
-        FacebookEmail: null,
-        FacebookId: null,
-        FacebookName: null,
-        result: "lose"
-      }
+      // document.getElementById('State').innerText = `登入成功 ${response.status}`
+      document.getElementById('FBId').innerText = null
+      document.getElementById('DataState').innerText = null
+      document.getElementById('FBName').innerText = null
     }else{
       document.getElementById('ShareState').innerText = '分享成功'
       getFBAPI('ShareGameContent')
