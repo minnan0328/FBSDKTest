@@ -152,9 +152,11 @@ function ShareGameContentNoData() {
     hashtag: "#volvo"
   }, function (response) {
     console.log(response)
-    document.getElementById('ShareState').innerText = '分享成功'
+
     if (response.error_code === 4201){
       document.getElementById('ShareState').innerText = '分享失敗'
+    }else{
+      document.getElementById('ShareState').innerText = '分享成功'
     }
   })
 }
