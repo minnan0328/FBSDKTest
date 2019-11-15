@@ -59,10 +59,11 @@ function getFBAPI(type) {
   FB.api("/me", 'GET', {
     fields: "id,name,email,picture"
   }, (response) => {
+    console.log(response, type)
     if (response) {
-      FBData.FacebookEmail = response.email
-      FBData.FacebookId = response.id
-      FBData.FacebookName = response.name
+      // FBData.FacebookEmail = response.email
+      // FBData.FacebookId = response.id
+      // FBData.FacebookName = response.name
       switch (type) {
         case 'sendUserFBData':
           // let payload = {
@@ -73,6 +74,7 @@ function getFBAPI(type) {
           // };
           document.getElementById('State').innerText = '登入成功'
           document.getElementById('DataState').innerText = '取得資料成功'
+          document.getElementById('ShareState').innerText = null
           document.getElementById('FBId').innerText = response.id
           document.getElementById('FBName').innerText = response.name
           // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
@@ -84,6 +86,7 @@ function getFBAPI(type) {
           //   FacebookName: response.name,
           //   result: "success"
           // };
+          console.log(response)
           document.getElementById('ShareState').innerText = '分享成功'
           document.getElementById('DataState').innerText = '取得資料成功'
           document.getElementById('FBId').innerText = response.id
@@ -118,31 +121,22 @@ function SendShareGameContent() {
     href: "https://minnan0328.github.io/Volvo-Game/",
     hashtag: "#volvo"
   }, function (response) {
-    if (response && !response.error_message) {
-      getFBAPI('SendShareGameContent')
-      // let payload = {
-      //   FacebookEmail: FBData.FacebookEmail,
-      //   FacebookId: FBData.FacebookId,
-      //   FacebookName: escape(FBData.FacebookName),
-      //   result: "success"
-      // };
-      // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
-      // console.log('success', payload);
-    } else {
-      if (response.error_message) {
-        let payload = {
-          FacebookEmail: null,
-          FacebookId: null,
-          FacebookName: null,
-          result: "lose"
-        }
-        // gameInstance.SendMessage(
-        //   "Root",
-        //   "FromHtml_obj",
-        //   JSON.stringify(payload)
-        // );
-        console.log('error_message', payload);
+    document.getElementById('ShareState').innerText = '分享成功'
+    getFBAPI('ShareGameContent')
+    if (response.error_code === 4201) {
+      document.getElementById('ShareState').innerText = '分享失敗'
+      let payload = {
+        FacebookEmail: null,
+        FacebookId: null,
+        FacebookName: null,
+        result: "lose"
       }
+      // gameInstance.SendMessage(
+      //   "Root",
+      //   "FromHtml_obj",
+      //   JSON.stringify(payload)
+      // );
+      console.log('error_message', payload);
     }
   })
 }
@@ -155,7 +149,11 @@ function ShareGameContentNoData() {
     href: "https://minnan0328.github.io/Volvo-Game/",
     hashtag: "#volvo"
   }, function (response) {
-
+    console.log(response)
+    document.getElementById('ShareState').innerText = '分享成功'
+    if (response.error_code === 4201){
+      document.getElementById('ShareState').innerText = '分享失敗'
+    }
   })
 }
 
@@ -164,22 +162,29 @@ function FBLogin(){
   FB.login(function (response) {
     console.log(response);
     if (response.status === 'connected') {
-      document.getElementById('State').innerText = '登入成功'
-      document.getElementById('FBId').innerText = response.id
-      document.getElementById('FBName').innerText = response.name
+      console.log(response)
+      document.getElementById('State').innerText = `登入成功 ${response.status}`
+      document.getElementById('FBId').innerText = response.authResponse.userID
+      document.getElementById('ShareState').innerText = null
+      document.getElementById('DataState').innerText = null
+      document.getElementById('FBName').innerText = null
     }else{
-      document.getElementById('State').innerText = '登入失敗'
-      document.getElementById('FBId').innerText = response.id
-      document.getElementById('FBName').innerText = response.name
+      document.getElementById('State').innerText = `登入失敗 ${response.status}`
+      document.getElementById('ShareState').innerText = null
+      document.getElementById('DataState').innerText = null
+      document.getElementById('FBId').innerText = null
+      document.getElementById('FBName').innerText = null
     }
   });
 }
 
 function FBLogout() {
   FB.logout(function (response) {
-    document.getElementById('State').innerText = '登出成功'
-    document.getElementById('FBId').innerText = response.id
-    document.getElementById('FBName').innerText = response.name
+    document.getElementById('State').innerText = `登出成功 ${response.status}`
+    document.getElementById('ShareState').innerText = null
+    document.getElementById('DataState').innerText = null
+    document.getElementById('FBId').innerText = null
+    document.getElementById('FBName').innerText = null
   })
 };
 
@@ -192,9 +197,19 @@ function clickShare() {
     href: 'https://minnan0328.github.io/Volvo-Game/',
     hashtag: '#volvo',
   }, function (response) {
-    console.log(response)
+    document.getElementById('State').innerText = null
+    document.getElementById('ShareState').innerText = '分享成功'
+    document.getElementById('DataState').innerText = null
+    document.getElementById('FBId').innerText = null
+    document.getElementById('FBName').innerText = null
+    if (response.error_code === 4201) {
+      document.getElementById('State').innerText = null
+      document.getElementById('ShareState').innerText = '分享失敗'
+      document.getElementById('DataState').innerText = null
+      document.getElementById('FBId').innerText = null
+      document.getElementById('FBName').innerText = null
+    }
   })
-  console.log('JS:Share Game Page')
 }
 // const ShareGamePage = () => {
 //   FB.ui({

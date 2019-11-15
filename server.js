@@ -59,6 +59,6 @@ server.listen(Port,IP, function () {
     var host = server.address().address
     var port = server.address().port
 
-    console.log("http://%s:%s", host, port)
+    console.log("https://%s:%s", host, port)
 });
 module.exports = app
