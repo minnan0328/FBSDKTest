@@ -45,7 +45,16 @@ function getLoginStatus(type) {
       FB.login(function (response) {
         console.log(response);
         if (response.status === 'connected') {
-          getFBAPI(type)
+          switch (type) {
+            case 'sendUserFBData':
+              getFBAPI(type)
+              break
+            case 'ShareGameContent':
+              SendShareGameContent(type)
+              break
+            default:
+              return
+          }
         }else{
           document.getElementById('State').innerText = '登入失敗'
         }
