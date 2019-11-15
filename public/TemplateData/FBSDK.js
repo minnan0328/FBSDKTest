@@ -132,7 +132,7 @@ function SendShareGameContent() {
   }, function (response) {
     if (response.error_code === 4201) {
       document.getElementById('ShareState').innerText = '分享失敗'
-      // document.getElementById('State').innerText = `登入成功 ${response.status}`
+      document.getElementById('State').innerText = null
       document.getElementById('FBId').innerText = null
       document.getElementById('DataState').innerText = null
       document.getElementById('FBName').innerText = null
