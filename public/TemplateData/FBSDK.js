@@ -130,8 +130,6 @@ function SendShareGameContent() {
     href: "https://minnan0328.github.io/Volvo-Game/",
     hashtag: "#volvo"
   }, function (response) {
-    document.getElementById('ShareState').innerText = '分享成功'
-    getFBAPI('ShareGameContent')
     if (response.error_code === 4201) {
       document.getElementById('ShareState').innerText = '分享失敗'
       let payload = {
@@ -140,12 +138,9 @@ function SendShareGameContent() {
         FacebookName: null,
         result: "lose"
       }
-      // gameInstance.SendMessage(
-      //   "Root",
-      //   "FromHtml_obj",
-      //   JSON.stringify(payload)
-      // );
-      console.log('error_message', payload);
+    }else{
+      document.getElementById('ShareState').innerText = '分享成功'
+      getFBAPI('ShareGameContent')
     }
   })
 }
