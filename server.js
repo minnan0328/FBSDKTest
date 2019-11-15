@@ -4,9 +4,10 @@ var express = require('express');
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
-var FBAPI = require('./FBAPI')
+// var FBAPI = require('./FBAPI')
 var app = express();
-const IP = '192.168.0.13';
+// const IP = '192.168.0.13';
+const IP = 'localhost';
 const Port = '8000';
 const options = {
     key: fs.readFileSync('./https/client-key.pem'),
@@ -19,7 +20,7 @@ app.use(
         extended: false
     })
 )
-app.use('/api', FBAPI)
+// app.use('/api', FBAPI)
 app.set('public', path.join(__dirname, './public'))
 app.engine('html', require('ejs').renderFile)
 app.set('dist engine', 'html')

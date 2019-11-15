@@ -65,12 +65,12 @@ function getFBAPI(type) {
       FBData.FacebookName = response.name
       switch (type) {
         case 'sendUserFBData':
-          let payload = {
-            FacebookEmail: response.email,
-            FacebookId: response.id,
-            FacebookName: response.name,
-            result: "success"
-          };
+          // let payload = {
+          //   FacebookEmail: response.email,
+          //   FacebookId: response.id,
+          //   FacebookName: response.name,
+          //   result: "success"
+          // };
           document.getElementById('State').innerText = '登入成功'
           document.getElementById('DataState').innerText = '取得資料成功'
           document.getElementById('FBId').innerText = response.id
@@ -78,12 +78,12 @@ function getFBAPI(type) {
           // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
           break
         case 'ShareGameContent':
-          let payload = {
-            FacebookEmail: response.email,
-            FacebookId: response.id,
-            FacebookName: response.name,
-            result: "success"
-          };
+          // let payload = {
+          //   FacebookEmail: response.email,
+          //   FacebookId: response.id,
+          //   FacebookName: response.name,
+          //   result: "success"
+          // };
           document.getElementById('ShareState').innerText = '分享成功'
           document.getElementById('DataState').innerText = '取得資料成功'
           document.getElementById('FBId').innerText = response.id
