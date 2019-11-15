@@ -31,12 +31,23 @@ function getLoginStatus(type) {
   FB.getLoginStatus(function (response) {
     console.log(response)
     if (response.status === 'connected') {
-      getFBAPI(type)
+      switch (type) {
+        case 'sendUserFBData':
+          getFBAPI(type)
+          // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+          break
+        case 'ShareGameContent':
+          SendShareGameContent(type)
+          // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
+          break
+      }
     } else {
       FB.login(function (response) {
         console.log(response);
         if (response.status === 'connected') {
           getFBAPI(type)
+        }else{
+          document.getElementById('State').innerText = '登入失敗'
         }
       });
 
@@ -54,15 +65,37 @@ function getFBAPI(type) {
       FBData.FacebookName = response.name
       switch (type) {
         case 'sendUserFBData':
-          sendUserFBData()
+          let payload = {
+            FacebookEmail: response.email,
+            FacebookId: response.id,
+            FacebookName: response.name,
+            result: "success"
+          };
+          document.getElementById('State').innerText = '登入成功'
+          document.getElementById('DataState').innerText = '取得資料成功'
+          document.getElementById('FBId').innerText = response.id
+          document.getElementById('FBName').innerText = response.name
+          // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
           break
         case 'ShareGameContent':
-          SendShareGameContent()
+          let payload = {
+            FacebookEmail: response.email,
+            FacebookId: response.id,
+            FacebookName: response.name,
+            result: "success"
+          };
+          document.getElementById('ShareState').innerText = '分享成功'
+          document.getElementById('DataState').innerText = '取得資料成功'
+          document.getElementById('FBId').innerText = response.id
+          document.getElementById('FBName').innerText = response.name
+          // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
           break
       }
       console.log(FBData);
     } else {
-      console.log(response)
+      document.getElementById('DataState').innerText = '取得資料失敗'
+      document.getElementById('FBId').innerText = response.id
+      document.getElementById('FBName').innerText = response.name
     }
   })
 }
@@ -75,15 +108,6 @@ function ShareGameContent() {
   getLoginStatus('ShareGameContent')
 }
 
-function sendFBDataForUnity() {
-  let payload = {
-    FacebookEmail: FBData.FacebookEmail,
-    FacebookId: FBData.FacebookId,
-    FacebookName: escape(FBData.FacebookName),
-    result: "success"
-  };
-  // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
-}
 
 function SendShareGameContent() {
   FB.ui({
@@ -95,14 +119,15 @@ function SendShareGameContent() {
     hashtag: "#volvo"
   }, function (response) {
     if (response && !response.error_message) {
-      let payload = {
-        FacebookEmail: FBData.FacebookEmail,
-        FacebookId: FBData.FacebookId,
-        FacebookName: escape(FBData.FacebookName),
-        result: "success"
-      };
+      getFBAPI('SendShareGameContent')
+      // let payload = {
+      //   FacebookEmail: FBData.FacebookEmail,
+      //   FacebookId: FBData.FacebookId,
+      //   FacebookName: escape(FBData.FacebookName),
+      //   result: "success"
+      // };
       // gameInstance.SendMessage("Root", "FromHtml_obj", JSON.stringify(payload))
-      console.log('success', payload);
+      // console.log('success', payload);
     } else {
       if (response.error_message) {
         let payload = {
@@ -139,14 +164,22 @@ function FBLogin(){
   FB.login(function (response) {
     console.log(response);
     if (response.status === 'connected') {
-      getFBAPI(type)
+      document.getElementById('State').innerText = '登入成功'
+      document.getElementById('FBId').innerText = response.id
+      document.getElementById('FBName').innerText = response.name
+    }else{
+      document.getElementById('State').innerText = '登入失敗'
+      document.getElementById('FBId').innerText = response.id
+      document.getElementById('FBName').innerText = response.name
     }
   });
 }
 
 function FBLogout() {
   FB.logout(function (response) {
-    console.log(response)
+    document.getElementById('State').innerText = '登出成功'
+    document.getElementById('FBId').innerText = response.id
+    document.getElementById('FBName').innerText = response.name
   })
 };
 
