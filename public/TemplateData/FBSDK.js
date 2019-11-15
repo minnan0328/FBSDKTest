@@ -144,7 +144,7 @@ function FBLogin(){
   });
 }
 
-function facebooklogout() {
+function FBLogout() {
   FB.logout(function (response) {
     console.log(response)
   })
