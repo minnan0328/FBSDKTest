@@ -215,6 +215,9 @@ function clickShare() {
     }
   })
 }
+const windowOpen = () => {
+  window.open('https://www.facebook.com/dialog/share?app_id=1366604616846064&display=popup&href=https://minnan0328.github.io/Volvo-Game/&redirect_uri=https://minnan0328.github.io/Volvo-Game/')
+};
 // const ShareGamePage = () => {
 //   FB.ui({
 //     app_id: '1366604616846064',
